@@ -1,0 +1,27 @@
+service: slack-bot
+
+provider:
+  name: google
+  runtime: nodejs8
+  memorySize: 128
+  project: my-personal-project
+  region: us-central1
+  credentials: ./serverless-config.json
+  environment:
+    SLACK_TOKEN: XXX
+    BITBUCKET_HOST: bitbucket.org
+
+plugins:
+  - serverless-google-cloudfunctions
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+functions:
+  slack:
+    handler: slack
+    events:
+      - http: path
